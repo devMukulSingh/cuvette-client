@@ -11,12 +11,21 @@ import {
 import SignUp from "./routes/SignUp/SignUp.tsx";
 import VerifyOtp from "./routes/VerifyOtp/VerifyOtp.tsx";
 import ErrorPage from "./error-page.tsx";
+import Navbar from "./components/Navbar.tsx";
+import Home from "./routes/Home/Home.tsx";
+import AuthLayout from "./layouts/AuthLayout.tsx";
+import HomeLayout from "./layouts/HomeLayout.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" errorElement={<ErrorPage />} element={<App />}>
-      <Route path="sign-up" element={<SignUp />} />
-      <Route path="sign-up/verify-otp" element={<VerifyOtp />} />
+    <Route  errorElement={<ErrorPage />} >
+      <Route element={<HomeLayout />} >
+        <Route element={<Home />} path="/" />
+      </Route>
+      <Route element={<AuthLayout />}>
+        <Route path="sign-up" element={<SignUp />} />
+        <Route path="sign-up/verify-otp" element={<VerifyOtp />} />
+      </Route>
     </Route>
   )
 );
