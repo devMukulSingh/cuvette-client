@@ -1,4 +1,3 @@
-import React from "react";
 import SignUpForm from "./components/SignUpForm";
 
 const SignUp = () => {
@@ -19,6 +18,8 @@ const SignUp = () => {
       md:w-5/6
       w-full
       flex
+      md:gap-32
+      sm:gap-20
       gap-10
       items-center
       h-full

@@ -21,7 +21,7 @@ const SignUpForm = () => {
   const form = useForm<TformValues>({
     resolver: zodResolver(signUpSchema),
   });
-  const { control, handleSubmit, reset } = form;
+  const {  handleSubmit,  } = form;
   const onSubmit = (data: TformValues) => {
     console.log(data);
   };
