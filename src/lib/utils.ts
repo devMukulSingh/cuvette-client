@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const base_url_server =
-  process.env.NODE_ENV === "production" ? `` : `http://localhost:8000/api/v1`;
+  process.env.NODE_ENV === "production" ? `https://cuvette-server.onrender.com/api/v1` : `http://localhost:8000/api/v1`;
 
 export const isAuth = async (token: string) => {
   const secret = new TextEncoder().encode(process.env.JWT_SECRET);
