@@ -53,7 +53,7 @@ const VerifyPhoneOtpForm = () => {
             token: data?.data.data.token || "",
           }),
         );
-        if (data.data.data && data.data.data.token !== "") {
+        if (data.data.data.token && data.data.data.token !== "") {
           Cookies.set("token", data.data.data.token, {
             sameSite: "None",
             secure: true,
@@ -63,7 +63,7 @@ const VerifyPhoneOtpForm = () => {
         }
       },
       onError(e: any) {
-        if (e) toast.error(e);
+        if (e.response.data) toast.error(e.response.data.error);
         else toast.error(`Internal server error`);
         console.log(e);
       },
@@ -81,7 +81,6 @@ const VerifyPhoneOtpForm = () => {
         phone: userData.phone,
       });
     } catch (e) {
-      toast.error(`Something went wrong`);
       console.log(e);
     }
   };

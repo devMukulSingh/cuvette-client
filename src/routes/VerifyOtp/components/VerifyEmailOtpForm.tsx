@@ -21,6 +21,7 @@ import { AxiosResponse } from "axios";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks.ts";
 import { setUserData } from "../../../redux/reducer.ts";
 import Cookies from "js-cookie";
+import { IapiResponse } from "@/lib/types.ts";
 
 type TformValues = z.infer<typeof verifyEmailOtpSchema>;
 
@@ -43,23 +44,22 @@ async function sendRequest(url: string, { arg }: { arg: Iarg }) {
 const VerifyEmailOtpForm = () => {
   const { userData } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-  console.log(userData);
 
   const navigate = useNavigate();
   const { trigger, isMutating } = useSWRMutation(
     `${base_url_server}/auth/sign-up/verify-emailotp`,
     sendRequest,
     {
-      onSuccess(data: AxiosResponse) {
+      onSuccess(data: AxiosResponse<IapiResponse>) {
         form.reset();
         dispatch(
           setUserData({
             ...userData,
             isEmailVerified: true,
-            token: data?.data.token,
+            token: data?.data.data.token,
           }),
         );
-        if (data.data.token && data.data.token !== "") {
+        if (data.data.data.token && data.data.data.token !== "") {
           Cookies.set("token", data.data.data.token, {
             sameSite: "None",
             secure: true,
@@ -87,7 +87,6 @@ const VerifyEmailOtpForm = () => {
           companyEmail: userData?.companyEmail,
         });
     } catch (e) {
-      toast.error(`Something went wrong`);
       console.log(e);
     }
   };

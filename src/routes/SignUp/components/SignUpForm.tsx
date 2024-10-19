@@ -56,9 +56,9 @@ const SignUpForm = () => {
       }
     },
     onError(e) {
-      if (e) toast.error(e);
-      else toast.error(`Internal server error`);
-      console.log(e);
+   if (e.response.data) toast.error(e.response.data.error);
+   else toast.error(`Internal server error`);
+   console.log(e);
     },
   });
   const form = useForm<TformValues>({
@@ -69,7 +69,6 @@ const SignUpForm = () => {
     try {
       await trigger(data);
     } catch (e) {
-      toast.error(`Something went wrong please try again later`);
       console.log(e);
     }
   };

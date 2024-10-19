@@ -21,7 +21,7 @@ type TformValues = z.infer<typeof jobPostSchema>;
 
 interface Iarg extends TformValues {
   id: string;
-  token:string
+  token: string;
 }
 
 export interface Iform {
@@ -32,14 +32,14 @@ export interface Iform {
 async function sendRequest(url: string, { arg }: { arg: Iarg }) {
   return await axios.post(url, arg, {
     withCredentials: true,
-    headers:{
-      Authorization:arg.token
-    }
+    headers: {
+      Authorization: arg.token,
+    },
   });
 }
 
 const JobPostForm = () => {
-  const token = Cookies.get('token');
+  const token = Cookies.get("token");
   const { userData } = useAppSelector((state) => state);
   const { trigger, isMutating } = useSWRMutation<
     AxiosResponse<IapiResponse>,
@@ -52,7 +52,8 @@ const JobPostForm = () => {
       form.reset();
     },
     onError(e) {
-      toast.error(e);
+      if (e.response.data) toast.error(e.response.data.error);
+      else toast.error(`Internal server error`);
       console.log(e);
     },
   });
@@ -70,7 +71,7 @@ const JobPostForm = () => {
     try {
       const formData = form.getValues();
       const candidates = formData.candidates.map((cand) =>
-        cand.replace("\n", ""),
+        cand.replace("\n", "")
       );
       if (!userData) return console.error("userData in redux is null");
       if (!token) return console.error("token in cookie is null");
@@ -82,7 +83,6 @@ const JobPostForm = () => {
         token,
       });
     } catch (e) {
-      toast.error(`Something went wrong`);
       console.log(e);
     }
   };

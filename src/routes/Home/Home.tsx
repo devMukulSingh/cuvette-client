@@ -1,9 +1,7 @@
-import { useSWRConfig } from "swr/_internal";
 import { Link } from "react-router-dom";
+import PostedJobs from "./components/PostedJobs";
 
 const Home = () => {
-  const { cache } = useSWRConfig();
-  console.log(cache.get("userData"));
 
   return (
     <>
@@ -14,6 +12,7 @@ const Home = () => {
         >
           Create Interview
         </Link>
+        <PostedJobs/>
       </div>
     </>
   );
