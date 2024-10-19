@@ -9,11 +9,10 @@ import { Iform } from "./SignUpForm.tsx";
 import  { User } from "lucide-react";
 
 
-const CompanyNameField = ({
-  form
-}: Iform) => {
+const CompanyNameField = ({ form, isMutating }: Iform) => {
   return (
     <FormField
+      disabled={isMutating}
       name="companyName"
       control={form.control}
       render={({ field }) => (
@@ -33,6 +32,6 @@ const CompanyNameField = ({
       )}
     />
   );
-}
+};
 
 export default CompanyNameField

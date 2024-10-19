@@ -10,10 +10,11 @@ import  { Phone, User } from "lucide-react";
 
 
 const PhoneField = ({
-  form
+  form,isMutating
 }: Iform) => {
   return (
     <FormField
+      disabled={isMutating}
       name="phone"
       control={form.control}
       render={({ field }) => (

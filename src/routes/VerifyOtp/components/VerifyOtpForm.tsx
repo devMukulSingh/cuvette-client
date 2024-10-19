@@ -1,30 +1,11 @@
-import { useForm, UseFormReturn } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { verifyOtpSchema } from "../../../lib/schema.ts";
-import { Form } from "../../../components/ui/form";
-import { Button } from "../../../components/ui/button.tsx";
-import EmailOtpField from "./EmailOtpField.tsx";
-import MobileOtpField from "./MobileOtpField.tsx";
 
-type TformValues = z.infer<typeof verifyOtpSchema>;
-
-export interface Iform {
-  form: UseFormReturn<TformValues, any, undefined>;
-  isMutating?: boolean;
-}
+import VerifyEmailOtpForm from "./VerifyEmailOtpForm.tsx";
+import VerifyPhoneOtpForm from "./VerifyPhoneOtpForm.tsx";
 
 const VerifyOtpForm = () => {
-  const form = useForm<TformValues>({
-    resolver: zodResolver(verifyOtpSchema),
-  });
-  const { handleSubmit } = form;
-  const onSubmit = (data: TformValues) => {
-    console.log(data);
-  };
+ 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
+    <div
       className="
     flex
     flex-col
@@ -43,19 +24,9 @@ const VerifyOtpForm = () => {
           Lorem, ipsum dolor sit amet consectetur adipisicing.
         </h1>
       </header>
-      <Form {...form}>
-        <div className="space-y-5 w-full">
-          <div className="space-y-2">
-            <EmailOtpField form={form} />
-            <Button>Verify</Button>
-          </div>
-          <div className="space-y-2">
-            <MobileOtpField form={form} />
-            <Button>Verify</Button>
-          </div>
-        </div>
-      </Form>
-    </form>
+      <VerifyEmailOtpForm/>
+      <VerifyPhoneOtpForm/>
+    </div>
   );
 };
 

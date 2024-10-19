@@ -9,11 +9,10 @@ import { Iform } from "./SignUpForm.tsx";
 import  { Group, User } from "lucide-react";
 
 
-const EmployeeSizeField = ({
-  form
-}: Iform) => {
+const EmployeeSizeField = ({ form, isMutating }: Iform) => {
   return (
     <FormField
+      disabled={isMutating}
       name="employeeSize"
       control={form.control}
       render={({ field }) => (
@@ -33,6 +32,6 @@ const EmployeeSizeField = ({
       )}
     />
   );
-}
+};
 
 export default EmployeeSizeField

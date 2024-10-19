@@ -8,9 +8,10 @@ import { Input } from "../../../components/ui/input.tsx";
 import { Iform } from "./SignUpForm.tsx";
 import { User } from "lucide-react";
 
-const NameField = ({ form }: Iform) => {
+const NameField = ({ form,isMutating }: Iform) => {
   return (
     <FormField
+      disabled={isMutating}
       name="name"
       control={form.control}
       render={({ field }) => (

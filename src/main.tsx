@@ -1,6 +1,5 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
 import "./index.css";
 import {
   createBrowserRouter,
@@ -10,28 +9,38 @@ import {
 } from "react-router-dom";
 import SignUp from "./routes/SignUp/SignUp.tsx";
 import VerifyOtp from "./routes/VerifyOtp/VerifyOtp.tsx";
-import ErrorPage from "./error-page.tsx";
-import Navbar from "./components/Navbar.tsx";
 import Home from "./routes/Home/Home.tsx";
 import AuthLayout from "./layouts/AuthLayout.tsx";
 import HomeLayout from "./layouts/HomeLayout.tsx";
+import { Toaster } from "react-hot-toast";
+import CacheProvider from "./lib/CacheProvider.tsx";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "./redux/store.ts";
+import { Provider } from "react-redux";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route  errorElement={<ErrorPage />} >
-      <Route element={<HomeLayout />} >
+    <>
+      <Route element={<HomeLayout />}>
         <Route element={<Home />} path="/" />
       </Route>
       <Route element={<AuthLayout />}>
         <Route path="sign-up" element={<SignUp />} />
         <Route path="sign-up/verify-otp" element={<VerifyOtp />} />
       </Route>
-    </Route>
+    </>
   )
 );
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <CacheProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
+      </PersistGate>
+    </CacheProvider>
+    <Toaster />
   </StrictMode>
 );

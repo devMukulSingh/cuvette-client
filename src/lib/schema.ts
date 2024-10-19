@@ -39,23 +39,22 @@ export const signUpSchema = z.object({
 })
 
 
-export const verifyOtpSchema = z.object({
+export const verifyEmailOtpSchema = z.object({
     emailOtp: z.coerce.number({
         required_error: "Email otp is required",
         invalid_type_error: "Only numbers 1-10 allowed"
-    }).refine(otp => otp.toString().length === 4, {
-        message: "Otp must be 4 numbers long",
-        path: ['emailOtp'],
-
-    }),
-    mobileOtp: z.coerce.number({
-        required_error: "Mobile otp is required",
-        invalid_type_error: "Only numbers 1-10 allowed"
-    }).refine(otp => otp.toString().trim().length !== 4, {
+    }).refine(otp => otp.toString().trim().length === 4, {
         message: "Otp must be 4 numbers long"
     }),
 })
-
+export const verifyPhoneOtpSchema = z.object({
+    phoneOtp: z.coerce.number({
+        required_error: "Mobile otp is required",
+        invalid_type_error: "Only numbers 1-10 allowed"
+    }).refine(otp => otp.toString().trim().length === 4, {
+        message: "Otp must be 4 numbers long"
+    }),
+})
 
 export const jobPostSchema = z.object({
     jobTitle: z.string({
@@ -77,15 +76,15 @@ export const jobPostSchema = z.object({
     }).trim().min(1, {
         message: "Experience level is required"
     }),
-    candidates : z.string({
-        required_error:"candidates are requried",
-        invalid_type_error:"Only array of emails are allowed"
-    }).trim().email().min(1,{
-        message:"candidate email is required"
+    candidates: z.string({
+        required_error: "candidates are requried",
+        invalid_type_error: "Only array of emails are allowed"
+    }).trim().email().min(1, {
+        message: "candidate email is required"
     }).array(),
-    endDate : z.date({
-        required_error:"End date is required",
-        invalid_type_error:"Only date is allowed"
+    endDate: z.date({
+        required_error: "End date is required",
+        invalid_type_error: "Only date is allowed"
     })
 
 })

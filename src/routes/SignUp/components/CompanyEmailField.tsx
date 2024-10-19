@@ -9,11 +9,10 @@ import { Iform } from "./SignUpForm.tsx";
 import  { Mail,  } from "lucide-react";
 
 
-const CompanyEmailField = ({
-  form
-}: Iform) => {
+const CompanyEmailField = ({ form, isMutating }: Iform) => {
   return (
     <FormField
+      disabled={isMutating}
       name="companyEmail"
       control={form.control}
       render={({ field }) => (
@@ -33,6 +32,6 @@ const CompanyEmailField = ({
       )}
     />
   );
-}
+};
 
 export default CompanyEmailField
