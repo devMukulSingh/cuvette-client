@@ -55,7 +55,7 @@ const VerifyPhoneOtpForm = () => {
         );
         if (data.data.data && data.data.data.token !== "") {
           Cookies.set("token", data.data.data.token, {
-            sameSite: "none",
+            sameSite: "None",
             secure: true,
             expires: 7,
           });

@@ -61,7 +61,7 @@ const VerifyEmailOtpForm = () => {
         );
         if (data.data.token && data.data.token !== "") {
           Cookies.set("token", data.data.data.token, {
-            sameSite: "none",
+            sameSite: "None",
             secure: true,
             expires: 7,
           });

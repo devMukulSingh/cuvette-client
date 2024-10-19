@@ -15,11 +15,13 @@ import { base_url_server } from "../../../lib/utils";
 import toast from "react-hot-toast";
 import { IapiResponse } from "../../../lib/types";
 import { useAppSelector } from "../../../redux/hooks";
+import Cookies from "js-cookie";
 
 type TformValues = z.infer<typeof jobPostSchema>;
 
 interface Iarg extends TformValues {
   id: string;
+  token:string
 }
 
 export interface Iform {
@@ -30,10 +32,14 @@ export interface Iform {
 async function sendRequest(url: string, { arg }: { arg: Iarg }) {
   return await axios.post(url, arg, {
     withCredentials: true,
+    headers:{
+      Authorization:arg.token
+    }
   });
 }
 
 const JobPostForm = () => {
+  const token = Cookies.get('token');
   const { userData } = useAppSelector((state) => state);
   const { trigger, isMutating } = useSWRMutation<
     AxiosResponse<IapiResponse>,
@@ -67,10 +73,13 @@ const JobPostForm = () => {
         cand.replace("\n", ""),
       );
       if (!userData) return console.error("userData in redux is null");
+      if (!token) return console.error("token in cookie is null");
+
       trigger({
         ...formData,
         candidates,
         id: userData?.id,
+        token,
       });
     } catch (e) {
       toast.error(`Something went wrong`);
