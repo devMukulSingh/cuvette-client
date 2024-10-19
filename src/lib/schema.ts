@@ -22,8 +22,9 @@ export const signUpSchema = z.object({
     })
     .max(20, {
       message: "Phone should be max 20 numbers long",
-    }).refine( phone => phone.at(0) === '+',{
-      message:"Phone number with country code is required"
+    })
+    .refine((phone) => phone.at(0) === "+", {
+      message: "Phone number with country code is required",
     }),
   companyEmail: z
     .string({

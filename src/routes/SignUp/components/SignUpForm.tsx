@@ -44,7 +44,11 @@ const SignUpForm = () => {
     onSuccess(data) {
       dispatch(setUserData(data.data.data));
       if (data.status === 200) {
-        Cookies.set("token", data.data.data.token);
+        Cookies.set("token", data.data.data.token,{
+          expires:7,
+          sameSite:'none',
+          secure:true
+        });
         toast.success("user already exists");
         navigate("/");
       } else {
