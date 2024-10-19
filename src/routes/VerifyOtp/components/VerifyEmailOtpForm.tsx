@@ -57,7 +57,7 @@ const VerifyEmailOtpForm = () => {
             ...userData,
             isEmailVerified: true,
             token: data?.data.token,
-          })
+          }),
         );
         if (data.data.token && data.data.token !== "") {
           Cookies.set("token", data.data.data.token, {
@@ -73,7 +73,7 @@ const VerifyEmailOtpForm = () => {
         else toast.error(`Internal server error`);
         console.log(e);
       },
-    }
+    },
   );
 
   const form = useForm<TformValues>({

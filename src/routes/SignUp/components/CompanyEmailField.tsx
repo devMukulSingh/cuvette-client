@@ -6,8 +6,7 @@ import {
 } from "../../../components/ui/form.tsx";
 import { Input } from "../../../components/ui/input.tsx";
 import { Iform } from "./SignUpForm.tsx";
-import  { Mail,  } from "lucide-react";
-
+import { Mail } from "lucide-react";
 
 const CompanyEmailField = ({ form, isMutating }: Iform) => {
   return (
@@ -34,4 +33,4 @@ const CompanyEmailField = ({ form, isMutating }: Iform) => {
   );
 };
 
-export default CompanyEmailField
+export default CompanyEmailField;

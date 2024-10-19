@@ -6,12 +6,9 @@ import {
 } from "../../../components/ui/form.tsx";
 import { Input } from "../../../components/ui/input.tsx";
 import { Iform } from "./SignUpForm.tsx";
-import  { Phone, User } from "lucide-react";
+import { Phone, User } from "lucide-react";
 
-
-const PhoneField = ({
-  form,isMutating
-}: Iform) => {
+const PhoneField = ({ form, isMutating }: Iform) => {
   return (
     <FormField
       disabled={isMutating}
@@ -34,6 +31,6 @@ const PhoneField = ({
       )}
     />
   );
-}
+};
 
-export default PhoneField
+export default PhoneField;

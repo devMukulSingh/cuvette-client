@@ -5,9 +5,6 @@ import Cookies from "js-cookie";
 import { isAuth } from "../lib/utils";
 
 const HomeLayout = () => {
-
-
-
   return (
     <>
       <HomeNavbar />

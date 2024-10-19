@@ -35,7 +35,7 @@ const EndDateField = ({ form }: Iform) => {
                   variant={"outline"}
                   className={cn(
                     "w-full px-5 h-12 text-left font-normal",
-                    !field.value && "text-muted-foreground"
+                    !field.value && "text-muted-foreground",
                   )}
                 >
                   {field.value ? (

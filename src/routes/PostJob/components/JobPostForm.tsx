@@ -18,8 +18,8 @@ import { useAppSelector } from "../../../redux/hooks";
 
 type TformValues = z.infer<typeof jobPostSchema>;
 
-interface Iarg extends TformValues{
-  id:string
+interface Iarg extends TformValues {
+  id: string;
 }
 
 export interface Iform {
@@ -34,7 +34,7 @@ async function sendRequest(url: string, { arg }: { arg: Iarg }) {
 }
 
 const JobPostForm = () => {
-  const { userData } = useAppSelector( state=> state)
+  const { userData } = useAppSelector((state) => state);
   const { trigger, isMutating } = useSWRMutation<
     AxiosResponse<IapiResponse>,
     any,
@@ -42,7 +42,7 @@ const JobPostForm = () => {
     Iarg
   >(`${base_url_server}/user/post-job`, sendRequest, {
     onSuccess() {
-      toast.success(`Job added`)
+      toast.success(`Job added`);
       form.reset();
     },
     onError(e) {
@@ -52,23 +52,25 @@ const JobPostForm = () => {
   });
   const form = useForm<TformValues>({
     resolver: zodResolver(jobPostSchema),
-    defaultValues:{
-      candidates:[],
-      endDate:undefined,
-      experienceLevel:'',
-      jobDescription:'',
-      jobTitle:''
-    }
+    defaultValues: {
+      candidates: [],
+      endDate: undefined,
+      experienceLevel: "",
+      jobDescription: "",
+      jobTitle: "",
+    },
   });
   const onSubmit = () => {
     try {
       const formData = form.getValues();
-      const candidates = formData.candidates.map( cand => cand.replace('\n',''));
-      if(!userData) return console.error('userData in redux is null')
+      const candidates = formData.candidates.map((cand) =>
+        cand.replace("\n", ""),
+      );
+      if (!userData) return console.error("userData in redux is null");
       trigger({
         ...formData,
         candidates,
-        id: userData?.id
+        id: userData?.id,
       });
     } catch (e) {
       toast.error(`Something went wrong`);
@@ -96,7 +98,12 @@ const JobPostForm = () => {
         <AddCandidateField form={form} />
         <EndDateField form={form} />
       </Form>
-      <Button onClick={onSubmit} type="button" disabled={isMutating} className="self-end w-fit px-10 py-3 h-8 ">
+      <Button
+        onClick={onSubmit}
+        type="button"
+        disabled={isMutating}
+        className="self-end w-fit px-10 py-3 h-8 "
+      >
         Send
       </Button>
     </form>

@@ -1,4 +1,10 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../components/ui/select.tsx";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../../components/ui/select.tsx";
 import {
   FormControl,
   FormField,
@@ -9,7 +15,7 @@ import {
 import { Iform } from "./JobPostForm.tsx";
 
 const ExperienceLevelField = ({ form }: Iform) => {
-  const experienceLevel = ["Fresher","Experienced"]
+  const experienceLevel = ["Fresher", "Experienced"];
   return (
     <FormField
       name="experienceLevel"
@@ -22,17 +28,15 @@ const ExperienceLevelField = ({ form }: Iform) => {
           <Select onValueChange={field.onChange}>
             <FormControl>
               <SelectTrigger className="px-5 h-12">
-                <SelectValue  placeholder="Select Experience Level"/>
+                <SelectValue placeholder="Select Experience Level" />
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              {
-                experienceLevel.map( (exp,index) => (
-                  <SelectItem   value={exp} key={index}>
-                      {exp}
-                  </SelectItem>
-                ))
-              }
+              {experienceLevel.map((exp, index) => (
+                <SelectItem value={exp} key={index}>
+                  {exp}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
           <FormMessage />

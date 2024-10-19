@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 const Middleware = ({ children }: { children: ReactNode }) => {
   const token = Cookies.get("token");
 
-  if (!token || token==='') {
+  if (!token || token === "") {
     return <Navigate to="/sign-up" />;
   } else {
     return children;

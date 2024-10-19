@@ -31,7 +31,7 @@ const SignUp = () => {
             neque quaerat saepe minima exercitationem est deleniti blanditiis,
             ducimus temporibus corrupti, vitae quod doloribus nulla sunt
           </p>
-            incidunt
+          incidunt
         </div>
         <SignUpForm />
       </div>

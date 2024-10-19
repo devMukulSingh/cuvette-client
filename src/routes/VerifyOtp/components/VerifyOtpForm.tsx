@@ -1,9 +1,7 @@
-
 import VerifyEmailOtpForm from "./VerifyEmailOtpForm.tsx";
 import VerifyPhoneOtpForm from "./VerifyPhoneOtpForm.tsx";
 
 const VerifyOtpForm = () => {
- 
   return (
     <div
       className="
@@ -24,8 +22,8 @@ const VerifyOtpForm = () => {
           Lorem, ipsum dolor sit amet consectetur adipisicing.
         </h1>
       </header>
-      <VerifyEmailOtpForm/>
-      <VerifyPhoneOtpForm/>
+      <VerifyEmailOtpForm />
+      <VerifyPhoneOtpForm />
     </div>
   );
 };

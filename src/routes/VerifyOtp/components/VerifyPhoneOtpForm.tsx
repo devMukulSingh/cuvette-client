@@ -15,7 +15,7 @@ import {
 } from "../../../components/ui/form.tsx";
 import { Input } from "../../../components/ui/input.tsx";
 import { CircleCheckBig, Phone } from "lucide-react";
-import { IapiResponse,  } from "../../../lib/types.ts";
+import { IapiResponse } from "../../../lib/types.ts";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AxiosResponse } from "axios";
@@ -40,7 +40,7 @@ const VerifyPhoneOtpForm = () => {
   const { userData } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { trigger,isMutating } = useSWRMutation(
+  const { trigger, isMutating } = useSWRMutation(
     `${base_url_server}/auth/sign-up/verify-phoneotp`,
     sendRequest,
     {
@@ -51,7 +51,7 @@ const VerifyPhoneOtpForm = () => {
             ...userData,
             isPhoneVerified: true,
             token: data?.data.data.token || "",
-          })
+          }),
         );
         if (data.data.data && data.data.data.token !== "") {
           Cookies.set("token", data.data.data.token, {
@@ -67,7 +67,7 @@ const VerifyPhoneOtpForm = () => {
         else toast.error(`Internal server error`);
         console.log(e);
       },
-    }
+    },
   );
 
   const form = useForm<TformValues>({

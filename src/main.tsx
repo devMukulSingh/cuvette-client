@@ -26,7 +26,7 @@ const router = createBrowserRouter(
       <Route element={<HomeLayout />}>
         <Route
           element={
-            <Middleware >
+            <Middleware>
               {" "}
               <Home />{" "}
             </Middleware>
@@ -47,8 +47,8 @@ const router = createBrowserRouter(
         <Route path="sign-up" element={<SignUp />} />
         <Route path="sign-up/verify-otp" element={<VerifyOtp />} />
       </Route>
-    </>
-  )
+    </>,
+  ),
 );
 
 createRoot(document.getElementById("root")!).render(
@@ -61,5 +61,5 @@ createRoot(document.getElementById("root")!).render(
       </PersistGate>
     </CacheProvider>
     <Toaster />
-  </StrictMode>
+  </StrictMode>,
 );

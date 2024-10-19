@@ -1,4 +1,4 @@
-import SignInForm from "./components/SignInForm"
+import SignInForm from "./components/SignInForm";
 
 const SignUp = () => {
   return (
@@ -31,7 +31,7 @@ const SignUp = () => {
             neque quaerat saepe minima exercitationem est deleniti blanditiis,
             ducimus temporibus corrupti, vitae quod doloribus nulla sunt
           </p>
-            incidunt
+          incidunt
         </div>
         <SignInForm />
       </div>

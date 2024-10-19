@@ -17,7 +17,7 @@ const HomeNavbar = () => {
   const dispatch = useAppDispatch();
   const handleLogout = () => {
     dispatch(removeUserData());
-    Cookies.remove('token');
+    Cookies.remove("token");
     navigate("/sign-up");
   };
   return (

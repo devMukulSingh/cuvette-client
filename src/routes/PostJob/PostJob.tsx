@@ -1,11 +1,11 @@
-import JobPostForm from './components/JobPostForm'
+import JobPostForm from "./components/JobPostForm";
 
 const PostJob = () => {
   return (
     <>
-        <JobPostForm/>
+      <JobPostForm />
     </>
-  )
-}
+  );
+};
 
-export default PostJob
+export default PostJob;

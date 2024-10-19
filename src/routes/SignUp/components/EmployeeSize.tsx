@@ -6,8 +6,7 @@ import {
 } from "../../../components/ui/form.tsx";
 import { Input } from "../../../components/ui/input.tsx";
 import { Iform } from "./SignUpForm.tsx";
-import  { Group, User } from "lucide-react";
-
+import { Group, User } from "lucide-react";
 
 const EmployeeSizeField = ({ form, isMutating }: Iform) => {
   return (
@@ -34,4 +33,4 @@ const EmployeeSizeField = ({ form, isMutating }: Iform) => {
   );
 };
 
-export default EmployeeSizeField
+export default EmployeeSizeField;
