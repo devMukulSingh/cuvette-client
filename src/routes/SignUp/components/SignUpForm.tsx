@@ -41,26 +41,11 @@ const SignUpForm = () => {
     TformValues
   >(`${base_url_server}/auth/sign-up/send-otp`, sendRequest, {
     onSuccess(data) {
-      const userData = form.getValues();
+      dispatch(setUserData(data.data.data));
       if (data.status === 200) {
         toast.success("user already exists");
-        dispatch(
-          setUserData({
-            ...userData,
-            token: data.data.data.token,
-            isEmailVerified: true,
-            isPhoneVerified: true,
-          })
-        );
         navigate("/");
       } else {
-        dispatch(
-          setUserData({
-            ...userData,
-            isEmailVerified: false,
-            isPhoneVerified: false,
-          })
-        );
         navigate("/sign-up/verify-otp");
       }
     },

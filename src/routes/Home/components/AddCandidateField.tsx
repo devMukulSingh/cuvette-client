@@ -5,8 +5,8 @@ import {
   FormLabel,
   FormMessage,
 } from "../../../components/ui/form.tsx";
-import { Input } from "../../../components/ui/input.tsx";
 import { Iform } from "./JobPostForm.tsx";
+import MultiValueInput from "./MultiValueInput.tsx";
 
 const AddCandidateField = ({ form }: Iform) => {
   return (
@@ -19,11 +19,7 @@ const AddCandidateField = ({ form }: Iform) => {
             Add Candidate
           </FormLabel>
           <FormControl>
-            <Input
-              className="px-5 h-12 items-center flex gap-2 rounded-md !border-black !border-inherit bg-transparent  py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring "
-              placeholder="x@gmail.com"
-              {...field}
-            />
+            <MultiValueInput field={field} />
           </FormControl>
           <FormMessage />
         </FormItem>

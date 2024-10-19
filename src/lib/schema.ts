@@ -79,9 +79,7 @@ export const jobPostSchema = z.object({
     candidates: z.string({
         required_error: "candidates are requried",
         invalid_type_error: "Only array of emails are allowed"
-    }).trim().email().min(1, {
-        message: "candidate email is required"
-    }).array(),
+    }).trim().email().array(),
     endDate: z.date({
         required_error: "End date is required",
         invalid_type_error: "Only date is allowed"

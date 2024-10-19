@@ -5,6 +5,7 @@ export interface IinitialState{
 }
 
 export interface IuserData{
+    id:string;
     name: string;
     phone: string;
     companyEmail: string;
