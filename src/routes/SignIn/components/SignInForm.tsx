@@ -2,7 +2,7 @@ import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { signUpSchema } from "../../../lib/schema.ts";
-import { Form } from "../../../components/ui/form";
+import { Form } from "../../../components/ui/form.tsx";
 import NameField from "./NameField.tsx";
 import PhoneField from "./PhoneField.tsx";
 import CompanyName from "./CompanyNameField.tsx";
@@ -18,7 +18,6 @@ import { useSWRConfig } from "swr/_internal";
 import { IapiResponse } from "@/lib/types.ts";
 import { setUserData } from "../../../redux/reducer.ts";
 import { useAppDispatch } from "../../../redux/hooks.ts";
-import Cookies from "js-cookie";
 
 type TformValues = z.infer<typeof signUpSchema>;
 
@@ -32,7 +31,7 @@ export interface Iform {
   form: UseFormReturn<TformValues, any, undefined>;
   isMutating: boolean;
 }
-const SignUpForm = () => {
+const SignInForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { trigger, isMutating } = useSWRMutation<
@@ -44,7 +43,6 @@ const SignUpForm = () => {
     onSuccess(data) {
       dispatch(setUserData(data.data.data));
       if (data.status === 200) {
-        Cookies.set('token',data.data.data.token)
         toast.success("user already exists");
         navigate("/");
       } else {
@@ -116,4 +114,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignInForm;

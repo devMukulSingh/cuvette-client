@@ -1,4 +1,5 @@
 import { HomeIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -10,7 +11,9 @@ const Sidebar = () => {
     h-full
     py-10
     ">
+      <Link to={'/'}>
       <HomeIcon className="text-neutral-500" size={25} />
+      </Link>
     </div>
   );
 };

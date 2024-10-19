@@ -20,6 +20,7 @@ import axios from "axios";
 import { AxiosResponse } from "axios";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks.ts";
 import { setUserData } from "../../../redux/reducer.ts";
+import Cookies from "js-cookie";
 
 type TformValues = z.infer<typeof verifyEmailOtpSchema>;
 
@@ -59,6 +60,11 @@ const VerifyEmailOtpForm = () => {
           })
         );
         if (data.data.token && data.data.token !== "") {
+          Cookies.set("token", data.data.data.token, {
+            sameSite: "none",
+            secure: true,
+            expires: 7,
+          });
           navigate("/");
         }
       },

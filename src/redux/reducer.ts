@@ -12,10 +12,13 @@ const rootReducer  = createSlice({
     reducers: {
         setUserData : (state,action) => {
             state.userData = action.payload;
+        },
+        removeUserData: (state) => {
+            state.userData = null
         }
     }
 })
 
 export default rootReducer.reducer;
 
-export const { setUserData } = rootReducer.actions;
+export const { setUserData, removeUserData } = rootReducer.actions;

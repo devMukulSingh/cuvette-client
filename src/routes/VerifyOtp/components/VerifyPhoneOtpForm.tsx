@@ -21,6 +21,7 @@ import axios from "axios";
 import { AxiosResponse } from "axios";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks.ts";
 import { setUserData } from "../../../redux/reducer.ts";
+import Cookies from "js-cookie";
 
 type TformValues = z.infer<typeof verifyPhoneOtpSchema>;
 
@@ -53,6 +54,11 @@ const VerifyPhoneOtpForm = () => {
           })
         );
         if (data.data.data && data.data.data.token !== "") {
+          Cookies.set("token", data.data.data.token, {
+            sameSite: "none",
+            secure: true,
+            expires: 7,
+          });
           navigate("/");
         }
       },

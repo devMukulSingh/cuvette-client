@@ -4,7 +4,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../../components/ui/form";
+} from "../../../components/ui/form.tsx";
 import { Input } from "../../../components/ui/input.tsx";
 import { Iform } from "./JobPostForm.tsx";
 

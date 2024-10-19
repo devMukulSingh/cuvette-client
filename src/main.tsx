@@ -17,12 +17,31 @@ import CacheProvider from "./lib/CacheProvider.tsx";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./redux/store.ts";
 import { Provider } from "react-redux";
+import PostJob from "./routes/PostJob/PostJob.tsx";
+import Middleware from "./components/Middleware.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route element={<HomeLayout />}>
-        <Route element={<Home />} path="/" />
+        <Route
+          element={
+            <Middleware >
+              {" "}
+              <Home />{" "}
+            </Middleware>
+          }
+          path="/"
+        />
+        <Route
+          element={
+            <Middleware>
+              {" "}
+              <PostJob />
+            </Middleware>
+          }
+          path="/post-job"
+        />
       </Route>
       <Route element={<AuthLayout />}>
         <Route path="sign-up" element={<SignUp />} />
