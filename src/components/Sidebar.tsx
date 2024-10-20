@@ -18,9 +18,6 @@ const Sidebar = () => {
       <Link to={"/"}>
         <HomeIcon className="text-neutral-500" size={25} />
       </Link>
-      {/* <Link to={"/send-mails"}>
-        <Mail className="text-neutral-500" size={25}/>
-      </Link> */}
     </div>
   );
 };

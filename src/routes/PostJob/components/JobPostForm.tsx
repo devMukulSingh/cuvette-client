@@ -97,7 +97,7 @@ const JobPostForm = () => {
     md:w-[50rem]
     w-full
     sm:p-5
-    py-5
+    py-10
     px-5   
     "
     >

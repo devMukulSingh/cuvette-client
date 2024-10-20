@@ -7,13 +7,13 @@ import { isAuth } from "../lib/utils";
 const HomeLayout = () => {
   return (
     <div
-      className="     h-screen
+      className="     min-h-screen
     w-full "
     >
       <HomeNavbar />
       <div
         className="
-        h-full
+        h-[calc(100vh-5rem)]
     flex 
   
     "
