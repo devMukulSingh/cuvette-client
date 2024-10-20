@@ -12,7 +12,8 @@ const VerifyOtpForm = () => {
     rounded-md
     p-5
     items-center
-    w-1/2
+    md:w-1/2
+    w-full
     max-w-[25rem]
     "
     >

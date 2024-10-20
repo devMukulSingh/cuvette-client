@@ -7,7 +7,8 @@ const VerifyOtp = () => {
     flex 
     h-[calc(100vh-5rem)] 
     w-full 
-    p-5
+    md:p-5
+    p-3
     sm:gap-10
     items-center
     justify-center
@@ -15,17 +16,19 @@ const VerifyOtp = () => {
     >
       <div
         className="
-      md:w-5/6
+      lg:w-5/6
+      md:w-[90%]
       w-full
       flex
       md:gap-32
-      sm:gap-20
       gap-10
       items-center
       h-full
+      md:justify-normal
+      justify-center
       "
       >
-        <div className="w-1/2">
+        <div className="w-1/2 hidden md:block">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis
             neque quaerat saepe minima exercitationem est deleniti blanditiis,

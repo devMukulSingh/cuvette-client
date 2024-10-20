@@ -15,17 +15,19 @@ const VerifySignInOtp = () => {
     >
       <div
         className="
-      md:w-5/6
+      lg:w-5/6
+      md:w-[90%]
       w-full
       flex
       md:gap-32
-      sm:gap-20
       gap-10
       items-center
+      md:justify-normal
+      justify-center
       h-full
       "
       >
-        <div className="w-1/2">
+        <div className="w-1/2 md:block hidden">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis
             neque quaerat saepe minima exercitationem est deleniti blanditiis,

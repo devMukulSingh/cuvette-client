@@ -97,7 +97,7 @@ const VerifyEmailOtpForm = () => {
     <>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
         <Form {...form}>
-          <div className="space-y-2">
+          <div className="space-y-10">
             <FormField
               disabled={isMutating}
               name="emailOtp"
