@@ -84,7 +84,8 @@ const SignUpForm = () => {
     p-5
     items-center
     min-h-[32rem]
-    w-1/2
+    w-full
+    md:w-1/2
     max-w-[25rem]
     "
     >
