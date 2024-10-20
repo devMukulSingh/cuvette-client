@@ -65,7 +65,7 @@ const VerifyEmailOtpForm = () => {
           ...userData,
           isEmailVerified: true,
           token: data?.token,
-        })
+        }),
       );
       navigate("/");
     },
@@ -118,9 +118,7 @@ const VerifyEmailOtpForm = () => {
                 </FormItem>
               )}
             />
-            <Button disabled={isMutating }>
-              Verify
-            </Button>
+            <Button disabled={isMutating}>Verify</Button>
           </div>
         </Form>
       </form>

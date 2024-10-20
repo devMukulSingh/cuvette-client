@@ -14,12 +14,12 @@ export interface IuserData {
   token?: string;
 }
 
-export interface Ijob{
-  jobDescription:string,
-  jobTitle:string,
-  experienceLevel:string,
-  endDate:Date,
-  candidates:string[]
+export interface Ijob {
+  jobDescription: string;
+  jobTitle: string;
+  experienceLevel: string;
+  endDate: Date;
+  candidates: string[];
 }
 
 export interface IapiResponse<T> {

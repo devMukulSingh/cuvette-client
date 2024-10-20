@@ -12,7 +12,7 @@ const Home = () => {
           Create Interview
         </Link>
         <PostedJobs />
-      </div>  
+      </div>
     </>
   );
 };

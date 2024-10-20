@@ -20,13 +20,15 @@ const PostedJobs = () => {
         if (e.response.data) toast.error(e.response.data.error);
         else toast.error(`Internal server error`);
       },
-    }
+    },
   );
   console.log(data);
-  
+
   return (
     <div className="flex flex-col h-full w-full">
-      {data?.data?.map((job:Ijob, index:number) => <SingleJob job={job} key={index} />)}
+      {data?.data?.map((job: Ijob, index: number) => (
+        <SingleJob job={job} key={index} />
+      ))}
     </div>
   );
 };

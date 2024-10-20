@@ -93,7 +93,9 @@ const SignInForm = () => {
         </p>
       </div>
       <footer className="space-y-3">
-        <Link className="text-sm text-neutral-500" to={"/sign-up"}>Don't have an account ? Sign Up</Link>
+        <Link className="text-sm text-neutral-500" to={"/sign-up"}>
+          Don't have an account ? Sign Up
+        </Link>
         <Button disabled={isMutating} className="h-8">
           Proceed
         </Button>

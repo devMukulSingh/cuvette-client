@@ -46,42 +46,42 @@ const VerifyEmailOtpForm = () => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
-  const { trigger, isMutating } = useSWRMutation<AxiosResponse<IapiResponse<IuserData>>,any,any,Iarg>(
-    `${base_url_server}/auth/sign-up/verify-emailotp`,
-    sendRequest,
-    {
-      onSuccess({data:{data}}) {
-        form.reset();
-        dispatch(
-          setUserData({
-            ...userData,
-            isEmailVerified: true,
-            token: data?.token,
-          }),
-        );
-        if (data?.token && data?.token !== "") {
-          Cookies.set("token", data.token, {
-            sameSite: "None",
-            secure: true,
-            expires: 7,
-          });
-          navigate("/");
-        }
-      },
-      onError(e) {
-        if (e.response.data) toast.error(e.response.data.error);
-        else toast.error(`Internal server error`);
-        console.log(e);
-      },
+  const { trigger, isMutating } = useSWRMutation<
+    AxiosResponse<IapiResponse<IuserData>>,
+    any,
+    any,
+    Iarg
+  >(`${base_url_server}/auth/sign-up/verify-emailotp`, sendRequest, {
+    onSuccess({ data: { data } }) {
+      form.reset();
+      dispatch(
+        setUserData({
+          ...userData,
+          isEmailVerified: true,
+          token: data?.token,
+        }),
+      );
+      if (data?.token && data?.token !== "") {
+        Cookies.set("token", data.token, {
+          sameSite: "None",
+          secure: true,
+          expires: 7,
+        });
+        navigate("/");
+      }
     },
-  );
+    onError(e) {
+      if (e.response.data) toast.error(e.response.data.error);
+      else toast.error(`Internal server error`);
+      console.log(e);
+    },
+  });
 
   const form = useForm<TformValues>({
     resolver: zodResolver(verifyEmailOtpSchema),
-    defaultValues:{
-      emailOtp:undefined
-    }
-
+    defaultValues: {
+      emailOtp: undefined,
+    },
   });
   const onSubmit = async (data: TformValues) => {
     try {

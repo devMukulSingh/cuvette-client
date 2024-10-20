@@ -41,10 +41,10 @@ const SignUpForm = () => {
     any,
     TformValues
   >(`${base_url_server}/auth/sign-up/send-otp`, sendRequest, {
-    onSuccess({data : {data},status}) {
+    onSuccess({ data: { data }, status }) {
       dispatch(setUserData(data));
       if (status === 200) {
-        Cookies.set("token", data?.token||"", {
+        Cookies.set("token", data?.token || "", {
           expires: 7,
           sameSite: "None",
           secure: true,

@@ -7,9 +7,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-
-export const fetcher = ({ args, url }: { args: string, url: string }) =>
-
+export const fetcher = ({ args, url }: { args: string; url: string }) =>
   axios
     .get(url, {
       withCredentials: true,
@@ -18,7 +16,6 @@ export const fetcher = ({ args, url }: { args: string, url: string }) =>
       },
     })
     .then((res) => res.data);
-
 
 export const base_url_server =
   process.env.NODE_ENV === "production"
@@ -35,4 +32,3 @@ export const isAuth = async (token: string) => {
     return false;
   }
 };
-

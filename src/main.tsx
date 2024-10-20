@@ -57,16 +57,14 @@ const router = createBrowserRouter(
           return null;
         }}
       >
-        <Route path="/sign-up" element={<SignUp />}/>
-          <Route path="sign-up/verify-otp" element={<VerifyOtp />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="sign-up/verify-otp" element={<VerifyOtp />} />
 
-
-        <Route element={<SignIn />} path="/sign-in"/>
-          <Route element={<VerifySignInOtp />} path="sign-in/verify-otp" />
-
+        <Route element={<SignIn />} path="/sign-in" />
+        <Route element={<VerifySignInOtp />} path="sign-in/verify-otp" />
       </Route>
-    </>
-  )
+    </>,
+  ),
 );
 
 createRoot(document.getElementById("root")!).render(
@@ -79,5 +77,5 @@ createRoot(document.getElementById("root")!).render(
       </PersistGate>
     </CacheProvider>
     <Toaster />
-  </StrictMode>
+  </StrictMode>,
 );

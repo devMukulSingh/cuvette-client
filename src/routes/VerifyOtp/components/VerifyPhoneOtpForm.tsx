@@ -40,41 +40,42 @@ const VerifyPhoneOtpForm = () => {
   const { userData } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { trigger, isMutating } = useSWRMutation<AxiosResponse<IapiResponse<IuserData>>,any,any,Iarg>(
-    `${base_url_server}/auth/sign-up/verify-phoneotp`,
-    sendRequest,
-    {
-      onSuccess({data:{data}}) {
-        form.reset();
-        dispatch(
-          setUserData({
-            ...userData,
-            isPhoneVerified: true,
-            token: data?.token || "",
-          }),
-        );
-        if (data?.token && data?.token !== "") {
-          Cookies.set("token", data?.token, {
-            sameSite: "None",
-            secure: true,
-            expires: 7,
-          });
-          navigate("/");
-        }
-      },
-      onError(e: any) {
-        if (e.response.data) toast.error(e.response.data.error);
-        else toast.error(`Internal server error`);
-        console.log(e);
-      },
+  const { trigger, isMutating } = useSWRMutation<
+    AxiosResponse<IapiResponse<IuserData>>,
+    any,
+    any,
+    Iarg
+  >(`${base_url_server}/auth/sign-up/verify-phoneotp`, sendRequest, {
+    onSuccess({ data: { data } }) {
+      form.reset();
+      dispatch(
+        setUserData({
+          ...userData,
+          isPhoneVerified: true,
+          token: data?.token || "",
+        }),
+      );
+      if (data?.token && data?.token !== "") {
+        Cookies.set("token", data?.token, {
+          sameSite: "None",
+          secure: true,
+          expires: 7,
+        });
+        navigate("/");
+      }
     },
-  );
+    onError(e: any) {
+      if (e.response.data) toast.error(e.response.data.error);
+      else toast.error(`Internal server error`);
+      console.log(e);
+    },
+  });
 
   const form = useForm<TformValues>({
     resolver: zodResolver(verifyPhoneOtpSchema),
-    defaultValues:{
-      phoneOtp:undefined
-    }
+    defaultValues: {
+      phoneOtp: undefined,
+    },
   });
   const onSubmit = async (data: TformValues) => {
     try {
