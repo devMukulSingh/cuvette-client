@@ -13,19 +13,20 @@ type Props = {
       endDate: Date;
     },
     "candidates"
-  >;
+  >  | ControllerRenderProps<{
+    candidatesEmail: string[];
+}, "candidatesEmail">;
 };
 
 const MultiValueInput = ({ field }: Props) => {
   const [currValue, setCurrValue] = useState("");
   function removeValue(val: string) {
-    console.log(val);
     const filtered = field.value.filter((multiValue) => multiValue !== val);
     field.onChange(filtered);
   }
   const handleOnKeyup = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter") {
-      console.log(field.value);
+    if (e.key === "Enter" && e.currentTarget.value.trim()!=='') {
+      console.log(e.currentTarget.value);
       field.onChange([...field.value, e.currentTarget.value]);
       setCurrValue("");
     }
@@ -55,7 +56,9 @@ const MultiValueInput = ({ field }: Props) => {
         className="border-none focus:outline-none focus-visible:ring-0 h-full shadow-none max-w-[765px] "
         placeholder="x@gmail.com"
         value={currValue}
-        onChange={(e) => setCurrValue(e.target.value)}
+        onChange={(e) => {
+          setCurrValue(e.target.value);
+        }}
       />
     </div>
   );

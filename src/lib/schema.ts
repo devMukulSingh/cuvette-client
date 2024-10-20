@@ -111,14 +111,12 @@ export const jobPostSchema = z.object({
     .min(1, {
       message: "Experience level is required",
     }),
-  candidates: z
-    .string({
-      required_error: "candidates are requried",
-      invalid_type_error: "Only array of emails are allowed",
-    })
-    .trim()
-    .email()
-    .array(),
+  candidates: z.array(z.string().trim().min(1, {
+    message: 'Candidate email is required'
+  })).min(1, {
+    message: "Candidate email is required"
+  }),
+
   endDate: z.date({
     required_error: "End date is required",
     invalid_type_error: "Only date is allowed",
@@ -126,24 +124,20 @@ export const jobPostSchema = z.object({
 });
 
 export const sendMailsSchema = z.object({
-  candidateEmails: z
+  candidatesEmail: z.array(z
     .string({
       required_error: "Email is required",
+      invalid_type_error:"Invalid email"
+    }).trim()
+    .email({
+      message:"Invalid email",
     })
-    .trim()
-    .email()
     .min(1, {
       message: "Email is required",
+    })).min(1,{
+      message:"Email is required"
     })
-    .array(),
-  message: z
-    .string({
-      required_error: "Message is required",
-    })
-    .trim()
-    .min(1, {
-      message: "Message is required",
-    }),
+
 });
 
 export const signInSchema = z.object({
