@@ -9,7 +9,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import SignUp from "./routes/SignUp/SignUp.tsx";
-import VerifyOtp from "./routes/VerifyOtp/VerifyOtp.tsx";
 import Home from "./routes/Home/Home.tsx";
 import AuthLayout from "./layouts/AuthLayout.tsx";
 import HomeLayout from "./layouts/HomeLayout.tsx";
@@ -19,12 +18,11 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./redux/store.ts";
 import { Provider } from "react-redux";
 import PostJob from "./routes/PostJob/PostJob.tsx";
-import Middleware from "./components/Middleware.tsx";
 import SignIn from "./routes/SignIn/SignIn.tsx";
 import VerifySignInOtp from "./routes/SignIn/VerifyOtp/VerifySignInOtp.tsx";
-import AuthMiddleware from "./components/AuthMiddleware.tsx";
 import Cookies from "js-cookie";
 import { isAuth } from "./lib/utils.ts";
+import VerifyOtp from "./routes/VerifyOtp/VerifyOtp.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,7 +31,6 @@ const router = createBrowserRouter(
         element={<HomeLayout />}
         loader={async ({ request }) => {
           const token = Cookies.get("token");
-          console.log(token);
           if (!token || token === "") {
             return redirect("/sign-in");
           }

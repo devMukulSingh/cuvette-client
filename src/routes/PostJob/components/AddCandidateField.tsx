@@ -14,8 +14,8 @@ const AddCandidateField = ({ form }: Iform) => {
       name="candidates"
       control={form.control}
       render={({ field }) => (
-        <FormItem className="  flex gap-10 items-center ">
-          <FormLabel className="w-[15rem] text-right  whitespace-nowrap   text-lg">
+        <FormItem className="  flex sm:flex-row flex-col items-start sm:gap-10 sm:items-center ">
+          <FormLabel className="w-[15rem] sm:text-right  text-md sm:text-lg">
             Add Candidate
           </FormLabel>
           <FormControl>

@@ -5,7 +5,7 @@ const Sidebar = () => {
   return (
     <div
       className="
-    w-20 
+    min-w-20 
     flex
     flex-col
     gap-10

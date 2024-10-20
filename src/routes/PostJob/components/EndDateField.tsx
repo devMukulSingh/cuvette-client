@@ -24,8 +24,8 @@ const EndDateField = ({ form }: Iform) => {
       name="endDate"
       control={form.control}
       render={({ field }) => (
-        <FormItem className="  flex gap-10 items-center ">
-          <FormLabel className="w-[15rem] text-right whitespace-nowrap  text-lg">
+        <FormItem className="  flex sm:flex-row flex-col items-start sm:gap-10 sm:items-center  ">
+          <FormLabel className="  w-[15rem] sm:text-right sm:text-lg">
             End Date
           </FormLabel>
           <Popover>
@@ -35,7 +35,7 @@ const EndDateField = ({ form }: Iform) => {
                   variant={"outline"}
                   className={cn(
                     "w-full px-5 h-12 text-left font-normal",
-                    !field.value && "text-muted-foreground",
+                    !field.value && "text-muted-foreground"
                   )}
                 >
                   {field.value ? (

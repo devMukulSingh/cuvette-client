@@ -14,8 +14,8 @@ const JobDescriptionField = ({ form }: Iform) => {
       name="jobDescription"
       control={form.control}
       render={({ field }) => (
-        <FormItem className="  flex gap-10  ">
-          <FormLabel className="py-2 text-right w-[15rem] whitespace-nowrap   text-lg">
+        <FormItem className="  flex sm:flex-row flex-col  items-start sm:gap-10 sm:items-center   ">
+          <FormLabel className="py-2 sm:text-right w-[15rem]   text-md sm:text-lg">
             Job Description
           </FormLabel>
           <FormControl>

@@ -94,10 +94,11 @@ const JobPostForm = () => {
     flex
     flex-col
     gap-4
-    sm:w-[50rem]
+    md:w-[50rem]
     w-full
-    p-5
-    
+    sm:p-5
+    py-5
+    px-5   
     "
     >
       <Form {...form}>

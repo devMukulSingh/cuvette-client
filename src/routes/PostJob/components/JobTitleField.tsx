@@ -14,13 +14,12 @@ const JobTitleField = ({ form }: Iform) => {
       name="jobTitle"
       control={form.control}
       render={({ field }) => (
-        <FormItem className="  flex items-center gap-10 ">
+        <FormItem className="  flex sm:flex-row flex-col items-start sm:gap-10 sm:items-center ">
           <FormLabel
             className="
-          whitespace-nowrap   
           w-[15rem]
-          text-right
-          text-lg"
+          sm:text-right
+         text-md sm:text-lg"
           >
             Job Title
           </FormLabel>

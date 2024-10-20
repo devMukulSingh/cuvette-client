@@ -6,20 +6,22 @@ import { isAuth } from "../lib/utils";
 
 const HomeLayout = () => {
   return (
-    <>
+    <div
+      className="     h-screen
+    w-full "
+    >
       <HomeNavbar />
       <div
         className="
+        h-full
     flex 
-    h-[calc(100vh-5rem)]
-    w-full 
-    items-center
+  
     "
       >
         <Sidebar />
         <Outlet />
       </div>
-    </>
+    </div>
   );
 };
 

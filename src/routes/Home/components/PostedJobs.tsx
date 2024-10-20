@@ -22,7 +22,6 @@ const PostedJobs = () => {
       },
     },
   );
-  console.log(data);
 
   return (
     <div className="flex flex-col h-full w-full">

@@ -21,8 +21,8 @@ const ExperienceLevelField = ({ form }: Iform) => {
       name="experienceLevel"
       control={form.control}
       render={({ field }) => (
-        <FormItem className="gap-10  flex items-center ">
-          <FormLabel className="text-right w-[15rem] whitespace-nowrap   text-lg">
+        <FormItem className="flex sm:flex-row flex-col items-start sm:gap-10 sm:items-center  ">
+          <FormLabel className="sm:text-right  w-[15rem]  text-md sm:text-lg">
             Experience Level
           </FormLabel>
           <Select onValueChange={field.onChange}>

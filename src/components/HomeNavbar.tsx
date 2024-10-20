@@ -21,23 +21,25 @@ const HomeNavbar = () => {
     navigate("/sign-up");
   };
   return (
-    <div className="py-10 px-20 border-b-2 h-20 items-center flex w-full justify-between bg-white">
+    <div className="py-10 md:px-20 px-5 border-b-2 h-20 items-center flex  justify-between   w-full ">
       <Link to={"/"}>
         <img
-          className="size-[7rem] object-contain object-left "
+          className="flex-shrink-0 sm:size-[7rem] size-[5rem] object-contain object-left  "
           src="/cuvetteLogo.svg"
           alt="logo"
         />
       </Link>
-      <div className="flex gap-8 items-center">
-        <Link to="/contact" className="text-xl font-medium">
+      <div className="flex gap-5 sm:gap-8 items-center">
+        <Link to="/contact" className="text-md sm:text-xl font-medium">
           Contact
         </Link>
         <Popover>
           <PopoverTrigger asChild>
-            <div className="flex gap-4 px-3 py-2 rounded-md border-2 shadow-sm cursor-pointer items-center">
+            <div className="flex gap-2 sm:gap-4 px-3 py-2 rounded-md border-2 shadow-sm cursor-pointer items-center">
               <Avatar letter={userData?.name[0]} />
-              <p className="text-sm">{userData?.name}</p>
+              <p className="text-sm whitespace-nowrap hidden sm:block">
+                {userData?.name}
+              </p>
               <SquareChevronDown size={20} className="text-neutral-500" />
             </div>
           </PopoverTrigger>
