@@ -1,4 +1,4 @@
-import { HomeIcon } from "lucide-react";
+import { HomeIcon, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
@@ -6,8 +6,10 @@ const Sidebar = () => {
     <div
       className="
     w-20 
-    flex 
-    justify-center 
+    flex
+    flex-col
+    gap-10
+    items-center 
     border-r 
     h-full
     py-10
@@ -16,6 +18,9 @@ const Sidebar = () => {
       <Link to={"/"}>
         <HomeIcon className="text-neutral-500" size={25} />
       </Link>
+      {/* <Link to={"/send-mails"}>
+        <Mail className="text-neutral-500" size={25}/>
+      </Link> */}
     </div>
   );
 };

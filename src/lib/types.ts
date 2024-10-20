@@ -14,8 +14,16 @@ export interface IuserData {
   token?: string;
 }
 
-export interface IapiResponse {
+export interface Ijob{
+  jobDescription:string,
+  jobTitle:string,
+  experienceLevel:string,
+  endDate:Date,
+  candidates:string[]
+}
+
+export interface IapiResponse<T> {
   msg?: string;
   error?: string;
-  data?: any;
+  data?: T;
 }

@@ -12,10 +12,10 @@ import { Button } from "../../../components/ui/button.tsx";
 import { base_url_server } from "../../../lib/utils.ts";
 import useSWRMutation from "swr/mutation";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import { useSWRConfig } from "swr/_internal";
-import { IapiResponse } from "@/lib/types.ts";
+import { IapiResponse, IuserData } from "@/lib/types.ts";
 import { setUserData } from "../../../redux/reducer.ts";
 import { useAppDispatch } from "../../../redux/hooks.ts";
 import Cookies from "js-cookie";
@@ -36,15 +36,15 @@ const SignUpForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { trigger, isMutating } = useSWRMutation<
-    AxiosResponse<IapiResponse>,
+    AxiosResponse<IapiResponse<IuserData>>,
     any,
     any,
     TformValues
   >(`${base_url_server}/auth/sign-up/send-otp`, sendRequest, {
-    onSuccess(data) {
-      dispatch(setUserData(data.data.data));
-      if (data.status === 200) {
-        Cookies.set("token", data.data.data.token, {
+    onSuccess({data : {data},status}) {
+      dispatch(setUserData(data));
+      if (status === 200) {
+        Cookies.set("token", data?.token||"", {
           expires: 7,
           sameSite: "None",
           secure: true,
@@ -56,9 +56,9 @@ const SignUpForm = () => {
       }
     },
     onError(e) {
-   if (e.response.data) toast.error(e.response.data.error);
-   else toast.error(`Internal server error`);
-   console.log(e);
+      if (e.response.data) toast.error(e.response.data.error);
+      else toast.error(`Internal server error`);
+      console.log(e);
     },
   });
   const form = useForm<TformValues>({
@@ -78,7 +78,7 @@ const SignUpForm = () => {
       className="
     flex
     flex-col
-    gap-8
+    gap-5
     border
     rounded-md
     p-5
@@ -103,7 +103,7 @@ const SignUpForm = () => {
           <EmployeeSizeField form={form} isMutating={isMutating} />
         </div>
       </Form>
-      <footer className="text-xs">
+      <div className="text-xs">
         <p className="text-center">
           By clicking on proceed, you will accept our
         </p>
@@ -111,10 +111,15 @@ const SignUpForm = () => {
           <span className="text-blue-500 font-medium">Terms</span> &&nbsp;
           <span className="text-blue-500 font-medium">Conditions</span>
         </p>
+      </div>
+      <footer className="space-y-3">
+        <Link className="text-sm text-neutral-500" to={"/sign-in"}>
+          Already have an account ? Sign In
+        </Link>
+        <Button disabled={isMutating} className="h-8">
+          Proceed
+        </Button>
       </footer>
-      <Button disabled={isMutating} className="h-8">
-        Proceed
-      </Button>
     </form>
   );
 };

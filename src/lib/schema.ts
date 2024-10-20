@@ -124,3 +124,33 @@ export const jobPostSchema = z.object({
     invalid_type_error: "Only date is allowed",
   }),
 });
+
+export const sendMailsSchema = z.object({
+  candidateEmails : z.string({
+    required_error:"Email is required",
+
+  }).trim().email().min(1,{
+    message:"Email is required"
+  }).array(),
+  message:z.string({
+  required_error:"Message is required"
+  }).trim().min(1,{
+    message:"Message is required"
+  })
+})
+
+export const signInSchema = z.object({
+  companyEmail: z
+    .string({
+      required_error: "Company email is required",
+    })
+    .trim()
+    .email()
+    .min(1, {
+      message: "Company email is required",
+    })
+    .max(30, {
+      message: "Email must be maximum 30 characters long",
+    }),
+
+});

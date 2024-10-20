@@ -15,7 +15,7 @@ import {
 } from "../../../components/ui/form.tsx";
 import { Input } from "../../../components/ui/input.tsx";
 import { CircleCheckBig, Phone } from "lucide-react";
-import { IapiResponse } from "../../../lib/types.ts";
+import { IapiResponse, IuserData } from "../../../lib/types.ts";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AxiosResponse } from "axios";
@@ -40,21 +40,21 @@ const VerifyPhoneOtpForm = () => {
   const { userData } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { trigger, isMutating } = useSWRMutation(
+  const { trigger, isMutating } = useSWRMutation<AxiosResponse<IapiResponse<IuserData>>,any,any,Iarg>(
     `${base_url_server}/auth/sign-up/verify-phoneotp`,
     sendRequest,
     {
-      onSuccess(data: AxiosResponse<IapiResponse>) {
+      onSuccess({data:{data}}) {
         form.reset();
         dispatch(
           setUserData({
             ...userData,
             isPhoneVerified: true,
-            token: data?.data.data.token || "",
+            token: data?.token || "",
           }),
         );
-        if (data.data.data.token && data.data.data.token !== "") {
-          Cookies.set("token", data.data.data.token, {
+        if (data?.token && data?.token !== "") {
+          Cookies.set("token", data?.token, {
             sameSite: "None",
             secure: true,
             expires: 7,
@@ -72,6 +72,9 @@ const VerifyPhoneOtpForm = () => {
 
   const form = useForm<TformValues>({
     resolver: zodResolver(verifyPhoneOtpSchema),
+    defaultValues:{
+      phoneOtp:undefined
+    }
   });
   const onSubmit = async (data: TformValues) => {
     try {

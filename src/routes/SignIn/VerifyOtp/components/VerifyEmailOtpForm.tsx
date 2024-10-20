@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { verifyEmailOtpSchema } from "../../../lib/schema.ts";
-import { Form } from "../../../components/ui/form";
-import { Button } from "../../../components/ui/button.tsx";
+import { verifyEmailOtpSchema } from "../../../../lib/schema.ts";
+import { Form } from "../../../../components/ui/form";
+import { Button } from "../../../../components/ui/button.tsx";
 import useSWRMutation from "swr/mutation";
-import { base_url_server } from "../../../lib/utils.ts";
+import { base_url_server } from "../../../../lib/utils.ts";
 import toast from "react-hot-toast";
 import { useForm, UseFormReturn } from "react-hook-form";
 import {
@@ -12,14 +12,14 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from "../../../components/ui/form";
-import { Input } from "../../../components/ui/input.tsx";
+} from "../../../../components/ui/form";
+import { Input } from "../../../../components/ui/input.tsx";
 import { CircleCheckBig, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AxiosResponse } from "axios";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks.ts";
-import { setUserData } from "../../../redux/reducer.ts";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks.ts";
+import { setUserData } from "../../../../redux/reducer.ts";
 import Cookies from "js-cookie";
 import { IapiResponse, IuserData } from "@/lib/types.ts";
 
@@ -46,42 +46,41 @@ const VerifyEmailOtpForm = () => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
-  const { trigger, isMutating } = useSWRMutation<AxiosResponse<IapiResponse<IuserData>>,any,any,Iarg>(
-    `${base_url_server}/auth/sign-up/verify-emailotp`,
-    sendRequest,
-    {
-      onSuccess({data:{data}}) {
-        form.reset();
-        dispatch(
-          setUserData({
-            ...userData,
-            isEmailVerified: true,
-            token: data?.token,
-          }),
-        );
-        if (data?.token && data?.token !== "") {
-          Cookies.set("token", data.token, {
-            sameSite: "None",
-            secure: true,
-            expires: 7,
-          });
-          navigate("/");
-        }
-      },
-      onError(e) {
-        if (e.response.data) toast.error(e.response.data.error);
-        else toast.error(`Internal server error`);
-        console.log(e);
-      },
+  const { trigger, isMutating } = useSWRMutation<
+    AxiosResponse<IapiResponse<IuserData>>,
+    any,
+    any,
+    Iarg
+  >(`${base_url_server}/auth/sign-in/verify-otp`, sendRequest, {
+    onSuccess({ data: { data } }) {
+      form.reset();
+      if (data?.token)
+        Cookies.set("token", data.token, {
+          sameSite: "None",
+          secure: true,
+          expires: 7,
+        });
+      dispatch(
+        setUserData({
+          ...userData,
+          isEmailVerified: true,
+          token: data?.token,
+        })
+      );
+      navigate("/");
     },
-  );
+    onError(e) {
+      if (e.response.data) toast.error(e.response.data.error);
+      else toast.error(`Internal server error`);
+      console.log(e);
+    },
+  });
 
   const form = useForm<TformValues>({
     resolver: zodResolver(verifyEmailOtpSchema),
-    defaultValues:{
-      emailOtp:undefined
-    }
-
+    defaultValues: {
+      emailOtp: undefined,
+    },
   });
   const onSubmit = async (data: TformValues) => {
     try {
@@ -100,7 +99,7 @@ const VerifyEmailOtpForm = () => {
         <Form {...form}>
           <div className="space-y-2">
             <FormField
-              disabled={userData?.isEmailVerified || isMutating}
+              disabled={isMutating}
               name="emailOtp"
               control={form.control}
               render={({ field }) => (
@@ -114,15 +113,12 @@ const VerifyEmailOtpForm = () => {
                         {...field}
                       />
                     </FormControl>
-                    {userData && userData.isEmailVerified && (
-                      <CircleCheckBig color="green" />
-                    )}
                   </div>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button disabled={isMutating || userData?.isEmailVerified}>
+            <Button disabled={isMutating }>
               Verify
             </Button>
           </div>

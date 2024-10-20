@@ -13,7 +13,7 @@ import useSWRMutation from "swr/mutation";
 import axios, { AxiosResponse } from "axios";
 import { base_url_server } from "../../../lib/utils";
 import toast from "react-hot-toast";
-import { IapiResponse } from "../../../lib/types";
+import { IapiResponse, Ijob } from "../../../lib/types";
 import { useAppSelector } from "../../../redux/hooks";
 import Cookies from "js-cookie";
 
@@ -42,7 +42,7 @@ const JobPostForm = () => {
   const token = Cookies.get("token");
   const { userData } = useAppSelector((state) => state);
   const { trigger, isMutating } = useSWRMutation<
-    AxiosResponse<IapiResponse>,
+    AxiosResponse<IapiResponse<Ijob>>,
     any,
     any,
     Iarg
@@ -71,7 +71,7 @@ const JobPostForm = () => {
     try {
       const formData = form.getValues();
       const candidates = formData.candidates.map((cand) =>
-        cand.replace("\n", "")
+        cand.replace("\n", ""),
       );
       if (!userData) return console.error("userData in redux is null");
       if (!token) return console.error("token in cookie is null");

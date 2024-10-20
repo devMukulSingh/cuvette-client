@@ -21,7 +21,7 @@ const HomeNavbar = () => {
     navigate("/sign-up");
   };
   return (
-    <div className="py-10 px-20 border-b-2 h-20 items-center flex w-full justify-between">
+    <div className="py-10 px-20 border-b-2 h-20 items-center flex w-full justify-between bg-white">
       <Link to={"/"}>
         <img
           className="size-[7rem] object-contain object-left "
@@ -29,25 +29,25 @@ const HomeNavbar = () => {
           alt="logo"
         />
       </Link>
-      <div className="flex gap-5 items-center">
+      <div className="flex gap-8 items-center">
         <Link to="/contact" className="text-xl font-medium">
           Contact
         </Link>
+        <Popover>
+          <PopoverTrigger asChild>
+            <div className="flex gap-4 px-3 py-2 rounded-md border-2 shadow-sm cursor-pointer items-center">
+              <Avatar letter={userData?.name[0]} />
+              <p className="text-sm">{userData?.name}</p>
+              <SquareChevronDown size={20} className="text-neutral-500" />
+            </div>
+          </PopoverTrigger>
+          <PopoverContent className="w-full">
+            <Button onClick={handleLogout} variant={"ghost"} className="px-2">
+              <p>Logout</p> <LogOut />
+            </Button>
+          </PopoverContent>
+        </Popover>
       </div>
-      <Popover>
-        <PopoverTrigger asChild>
-          <div className="flex gap-4 px-3 py-2 rounded-md border-2 shadow-sm cursor-pointer items-center">
-            <Avatar letter={userData?.name[0]} />
-            <p className="text-sm">{userData?.name}</p>
-            <SquareChevronDown size={20} className="text-neutral-500" />
-          </div>
-        </PopoverTrigger>
-        <PopoverContent className="w-full">
-          <Button onClick={handleLogout} variant={"ghost"} className="px-2">
-            <p>Logout</p> <LogOut />
-          </Button>
-        </PopoverContent>
-      </Popover>
     </div>
   );
 };

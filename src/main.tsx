@@ -4,6 +4,7 @@ import "./index.css";
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  redirect,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -19,36 +20,53 @@ import { persistor, store } from "./redux/store.ts";
 import { Provider } from "react-redux";
 import PostJob from "./routes/PostJob/PostJob.tsx";
 import Middleware from "./components/Middleware.tsx";
+import SignIn from "./routes/SignIn/SignIn.tsx";
+import VerifySignInOtp from "./routes/SignIn/VerifyOtp/VerifySignInOtp.tsx";
+import AuthMiddleware from "./components/AuthMiddleware.tsx";
+import Cookies from "js-cookie";
+import { isAuth } from "./lib/utils.ts";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route element={<HomeLayout />}>
-        <Route
-          element={
-            <Middleware>
-              {" "}
-              <Home />{" "}
-            </Middleware>
+      <Route
+        element={<HomeLayout />}
+        loader={async ({ request }) => {
+          const token = Cookies.get("token");
+          console.log(token);
+          if (!token || token === "") {
+            return redirect("/sign-in");
           }
-          path="/"
-        />
-        <Route
-          element={
-            <Middleware>
-              {" "}
-              <PostJob />
-            </Middleware>
+          const isAuthenticated = await isAuth(token);
+          if (!isAuthenticated) return redirect("/sign-in");
+          return null;
+        }}
+      >
+        <Route element={<Home />} path="/" />
+        <Route element={<PostJob />} path="/post-job" />
+      </Route>
+
+      <Route
+        element={<AuthLayout />}
+        loader={async ({ request }) => {
+          const token = Cookies.get("token");
+          if (token && token !== "") {
+            const isAuthenticated = await isAuth(token);
+            if (isAuthenticated) return redirect("/");
           }
-          path="/post-job"
-        />
+          return null;
+        }}
+      >
+        <Route path="/sign-up" element={<SignUp />}/>
+          <Route path="sign-up/verify-otp" element={<VerifyOtp />} />
+
+
+        <Route element={<SignIn />} path="/sign-in"/>
+          <Route element={<VerifySignInOtp />} path="sign-in/verify-otp" />
+
       </Route>
-      <Route element={<AuthLayout />}>
-        <Route path="sign-up" element={<SignUp />} />
-        <Route path="sign-up/verify-otp" element={<VerifyOtp />} />
-      </Route>
-    </>,
-  ),
+    </>
+  )
 );
 
 createRoot(document.getElementById("root")!).render(
@@ -61,5 +79,5 @@ createRoot(document.getElementById("root")!).render(
       </PersistGate>
     </CacheProvider>
     <Toaster />
-  </StrictMode>,
+  </StrictMode>
 );

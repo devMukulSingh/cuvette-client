@@ -1,6 +1,6 @@
-import SignInForm from "./components/SignInForm";
+import VerifyOtpForm from "./components/VerifyOtpForm";
 
-const SignIn = () => {
+const VerifySignInOtp = () => {
   return (
     <div
       className="
@@ -33,10 +33,10 @@ const SignIn = () => {
           </p>
           incidunt
         </div>
-        <SignInForm />
+        <VerifyOtpForm />
       </div>
     </div>
   );
 };
 
-export default SignIn;
+export default VerifySignInOtp;
